@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculator</title>
+  </head>
+  <body>
+    <script>
+      let timeout;
+      function debounceAns() {
+        clearTimeout(timeout);
+        timeout = setTimeout(getSum, 1000);
+      }
+
+      async function getSum() {
+        const number1 = parseInt(document.getElementById("number1").value);
+        const number2 = parseInt(document.getElementById("number2").value);
+        const ansPromised = await fetch(
+          "https://sum-server.100xdevs.com/sum?a=" + number1 + "&b=" + number2
+        );
+        const ans = await ansPromised.text();
+        document.getElementById("result").innerHTML = ans;
+      }
+    </script>
+    <!-- <label for="number1">Enter Number1</label>
+    <input type="text" id="number1" name="number1" oninput="debounceAns()" />
+    <br /><br />
+    <label for="number2">Enter Number2</label>
+    <input type="text" id="number2" name="number2" oninput="debounceAns()" />
+    <br /><br />
+    <button onclick="getSum()">Ans</button>
+    <div id="result"></div> -->
+
+    <label for="number1">Enter Number1</label>
+    <input type="text" id="number1" name="number1" oninput="debounceAns()" />
+    <br /><br />
+    <label for="number2">Enter Number2</label>
+    <input type="text" id="number2" name="number2" oninput="debounceAns()" />
+    <br /><br />
+
+    <div class="result"></div>
+  </body>
+</html>
